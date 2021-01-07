@@ -2,18 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"> 
     <title><?php echo $title;?></title>
     <meta content="Irfan Arifin" name="author">
     <link href="<?php echo base_url().'uploads/favicon.png'?>" rel="shortcut icon">
     <link href="<?php echo base_url().'uploads/favicon.png'?>" rel="apple-touch-icon">
     <!--Chartist Chart CSS -->
-    <link rel="stylesheet" href="<?php echo base_url().'assets/theme/assets/plugins/chartist/css/chartist.min.css'?>"><!-- App css -->
     <link href="<?php echo base_url().'assets/theme/assets/css/bootstrap.min.css'?>" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url().'assets/theme/assets/css/icons.css'?>" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url().'assets/theme/assets/css/metisMenu.min.css'?>" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url().'assets/theme/assets/css/style.css'?>" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url().'assets/theme/assets/css/pace.css'?>" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url().'assets/theme/assets/plugins/timepicker/bootstrap-material-datetimepicker.css'?>" rel="stylesheet">
+    
     <!--  datatable -->
     <link href="<?php echo base_url().'assets/theme/assets/plugins/datatables/dataTables.bootstrap4.min.css'?>" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url().'assets/theme/assets/plugins/datatables/buttons.bootstrap4.min.css'?>" rel="stylesheet" type="text/css">
@@ -23,6 +24,8 @@
 
     <link href="<?php echo base_url().'assets/jquery-ui-1.12.1.custom/jquery-ui.css'?>" rel="stylesheet">
         <!-- jQuery  -->
+
+    <link href="<?php echo base_url().'assets/theme/assets/plugins/morris/morris.css'?>" rel="stylesheet">    
         
     <script src="<?php echo base_url().'assets/theme/assets/js/jquery.min.js'?>"></script>
     <script src="<?php echo base_url().'assets/theme/assets/js/bootstrap.bundle.min.js'?>"></script>
@@ -46,52 +49,15 @@
     <script src="<?php echo base_url().'assets/theme/assets/plugins/sw/sweetalert.js'?>"></script>
 
     <script src="<?php echo base_url().'assets/theme/assets/js/sortcut.js'?>"></script>
+    <script src="<?php echo base_url().'assets/theme/assets/js/pace.min.js'?>"></script> 
 
     <script src="<?php echo base_url().'assets/jquery-ui-1.12.1.custom/jquery-ui.min.js'?>"></script>
     <script src="<?php echo base_url().'assets/theme/assets/plugins/moment/moment.js'?>"></script>
     <script src="<?php echo base_url().'assets/theme/assets/plugins/timepicker/bootstrap-material-datetimepicker.js'?>"></script>
     
-    <style>
-    @media print{
-        #wrapper {
-            display:none;
-            }
-        
-        .modal-footer, .modal-header {
-            display:none;
-        }
-
-        title{
-        display: none;
-        }
-        /* .page-content{
-            display: none;
-        } */
-
-        .modal-beli {
-            display:none;
-        }
-        .card {
-            display:none;
-        }
-        .card-body {
-            display:none;
-        }
-        .table{
-            display:none;
-        }
-
-        .width: 74mm;
-        
-        
-    }
-        h4,h5 {
-        color: #000000!important;
-        }
-
-
-
-    </style>
+    <script src="<?php echo base_url().'assets/theme/assets/plugins/raphael/raphael.min.js'?>"></script>
+    <script src="<?php echo base_url().'assets/theme/assets/plugins/morris/morris.min.js'?>"></script>
+    
 
     <script>
     $(function () {

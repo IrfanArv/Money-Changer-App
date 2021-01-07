@@ -31,24 +31,34 @@
         </li> 
     <?php }?>
     <?php if($this->session->userdata('level')=='2'){ ;?>
-    <li class="hidden-sm">
-        <button type="button" onclick="bukalaci()" class="crypto-balance btn btn-outline-dark waves-effect waves-light"><i class="dripicons-archive align-self-center"></i>
-            <div class="btc-balance">
-                <span>Buka Laci</span>
-            </div>
-        </button>
-    </li>
+        <li class="hidden-sm">
+            <button type="button" onclick="laci()" data-toggle="tooltip" data-placement="top" title="Lihat Stock Barang" class="crypto-balance btn btn-outline-primary waves-effect waves-light">
+                <i class="dripicons-wallet align-self-center"></i>
+                <div class="btc-balance">
+                    <h5 class="m-0" id="total_barang" ></h5>
+                </div>
+            </button>
+        </li> 
     <?php }?>
 
         
         <li class="dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user pr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <!-- <img src="<?php echo base_url().'/assets/theme/assets/images/users/user-4.jpg'?>" alt="profile-user" class="rounded-circle">  -->
-                <span class="ml-1 nav-user-name hidden-sm"><?php echo $this->session->userdata('username') ?> <i class="mdi mdi-chevron-down"></i></span></a>
+                <span class="ml-1 nav-user-name hidden-sm"><?php echo $this->session->userdata('username') ?> 
+                (
+                    <?php 
+                    if($this->session->userdata('level')=='1'){echo "Administrator";}
+                    elseif($this->session->userdata('level')=='2'){echo "Backoffice";}
+                    elseif($this->session->userdata('level')=='3'){echo "Teller";}
+                    elseif($this->session->userdata('level')=='4'){echo "General Manager";}
+                    ?>
+                )   
+                    <i class="mdi mdi-chevron-down"></i></span></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <!-- <a class="dropdown-item" href="#"><i class="dripicons-user text-muted mr-2"></i> Profile</a> 
                     <div class="dropdown-divider"></div> -->
-                        <a class="dropdown-item" href="<?= base_url() ?>administrator/logout">
+                        <a class="dropdown-item" href="<?= base_url() ?>valas/adminvalas/logout">
                         <i class="dripicons-exit text-muted mr-2"></i> Logout</a>
             </div>
         </li>
@@ -82,9 +92,9 @@
                 </li>
                 <?php };?>
                 <?php if($this->session->userdata('level')=='1'){ ;?>
-                <li <?php if($this->uri->segment(2)=="transcation_today" || "recap_validasi" || "recap_teller"){echo "class='has-submenu active'";}?>><a href="#">
+                <!-- <li <?php if($this->uri->segment(2)=="transcation_today" || "recap_validasi" || "recap_teller"){echo "class='has-submenu active'";}?>><a href="#">
                     <i class="dripicons-archive"></i>
-                    <span>Transaksi Pembelian</span></a>
+                    <span>Data Pembelian</span></a>
                     <ul class="submenu">
                         <li <?php if($this->uri->segment(2)=="transcation_today"){echo "class='active'";}?> ><a href="<?php echo base_url().'administrator/transcation_today'?>"><i class="dripicons-card"></i>Pembelian Hari Ini</a></li>
                         <li class="has-submenu <?php if($this->uri->segment(2)=="recap_validasi" || "recap_teller"){echo "active";}?>"><a href="#"><i class="dripicons-copy"></i>Recap Pembelian</a>
@@ -94,15 +104,69 @@
                             </ul>
                         </li>
                     </ul>
+                </li> -->
+                <!-- <li><a href="#" onclick="create_jual()">
+                    <i class="dripicons-browser-upload"></i>Penjualan
+                    </a>
+                </li> -->
+                
+                <li class="has-submenu <?php if($this->uri->segment(3)=="transcation_today"){echo "active";}?> <?php if($this->uri->segment(3)=="penjualan"){echo "active";}?> <?php if($this->uri->segment(3)=="recap_teller" ){echo "active";}?> <?php if($this->uri->segment(3)=="detail_penjualan" ){echo "active";}?> <?php if($this->uri->segment(3)=="faktur" ){echo "active";}?>"><a href="#">
+                    <i class="dripicons-swap"></i>
+                    <span>Transaksi</span></a>
+                    <ul class="submenu">
+                        <li class="has-submenu <?php if($this->uri->segment(3)=="transcation_today"){echo "active";}?> <?php if($this->uri->segment(3)=="recap_teller"){echo "active";}?>">
+                            <a href="#">
+                                <i class="dripicons-cart"></i>Pembelian</a>
+                            <ul class="submenu">
+                                <li <?php if($this->uri->segment(3)=="transcation_today"){echo "class='active'";}?> ><a href="<?php echo base_url().'valas/adminvalas/transcation_today'?>"><i class="dripicons-clipboard"></i>Pembelian Hari Ini</a></li>
+                                <li <?php if($this->uri->segment(3)=="recap_teller"){echo "class='active'";}?> ><a href="<?php echo base_url().'valas/adminvalas/recap_teller'?>"><i class="dripicons-calendar"></i>Recap Transaksi Teller</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has-submenu <?php if($this->uri->segment(3)=="faktur" ){echo "active";}?> <?php if($this->uri->segment(3)=="penjualan" ){echo "active";}?> <?php if($this->uri->segment(3)=="detail_penjualan" ){echo "active";}?>">
+                            <a href="#">
+                                <i class="dripicons-store"></i>Penjualan</a>
+                            <ul class="submenu">
+                                <li><a href="#" onclick="create_jual()">
+                                <i class="dripicons-browser-upload"></i>Buat Penjualan Baru</a>
+                                </li>
+                                <li <?php if($this->uri->segment(3)=="faktur"){echo "class='active'";}?> <?php if($this->uri->segment(3)=="penjualan"){echo "class='active'";}?> <?php if($this->uri->segment(3)=="detail_penjualan"){echo "class='active'";}?>><a href="<?php echo base_url().'valas/adminvalas/penjualan'?> ">
+                                <i class="dripicons-view-list"></i>Data Penjualan Valas</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
                 </li>
-                <li <?php if($this->uri->segment(2)=="user"){echo "class='has-submenu active last-elements'";}?>><a href="<?php echo base_url().'administrator/user'?>">
-                        <i class="dripicons-user"></i>User
+
+                
+
+                <li class="has-submenu <?php if($this->uri->segment(3)=="barang"){echo "active";}?> last-elements"><a href="#">
+                    <i class="dripicons-wallet"></i>
+                    <span>Rupiah</span></a>
+                    <ul class="submenu">
+                        <li <?php if($this->uri->segment(3)=="barang"){echo "class='active'";}?> ><a href="<?php echo base_url().'valas/adminvalas/barang'?>"><i class="dripicons-ticket"></i>Drop Rupiah</a></li>
+                    </ul>
+                </li>
+
+                <!-- <li><a href="#" onclick="laci_user()">
+                        <i class="dripicons-archive"></i>Laci User
+                    </a>
+                </li> -->
+
+                <li class="has-submenu <?php if($this->uri->segment(3)=="relasi"){echo "active";}?> last-elements"><a href="<?php echo base_url().'valas/adminvalas/relasi'?>">
+                        <i class="dripicons-user-group"></i>Relasi
                     </a>
                 </li>
-                <li <?php if($this->uri->segment(2)=="barang"){echo "class='has-submenu active last-elements'";}?>><a href="<?php echo base_url().'administrator/barang'?>">
-                        <i class="dripicons-network-3"></i>Drop Barang (RP)
-                    </a>
+
+                <li class="has-submenu <?php if($this->uri->segment(3)=="user"){echo "active";}?> last-elements"><a href="#">
+                    <i class="dripicons-gear"></i>
+                    <span>Pengaturan</span></a>
+                    <ul class="submenu">
+                        <li <?php if($this->uri->segment(3)=="user"){echo "class='active'";}?> ><a href="<?php echo base_url().'valas/adminvalas/user'?>"><i class="dripicons-user"></i>Akun</a></li>
+                    </ul>
                 </li>
+
                 <?php };?>
             </ul>
         </div>
